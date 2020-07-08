@@ -1,0 +1,277 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none !important;
+
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#background-header {
+    background-image: url(../images/slide3.jpg);
+    min-height: 550px;
+    background-size: cover;
+    background-position:-150px -155px;
+    background-repeat: no-repeat;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 12px 20px 0 rgba(0, 0, 0, 0.19);
+    background-attachment: fixed;
+}
+
+#header {
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    padding-top: 15px;
+}
+
+
+
+#icon {
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    font-size: 60px;
+}
+
+#logo p {
+    margin-left: 10px;
+    font-family: Satisfy;
+    font-size: 40px;
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 25px #fff, 0 0 30px #fff;
+}
+#logo-text {
+    color: #fff;
+}
+
+#logo-text:hover {
+    text-shadow: 0 0 10px #fff, 0 0 25px #fff, 0 0 30px #fff !important;
+
+}
+
+#menu .menu-item {
+
+    display: inline;
+    margin: 15px 20px;
+
+}
+
+#menu li a {
+    color: #fff;
+    transition: all 0.3s;
+    font-weight: 600;
+    text-shadow: 0 0 5px #000,0 0 10px #000;
+
+}
+
+.has-sub-menu {
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.sub-menu {
+    position: absolute;
+    display: none;
+}
+
+#header a:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #fff,0 0 10px #fff, 0 0 15px #fff;
+}
+
+.has-sub-menu:hover .sub-menu {
+    display: flex;
+}
+
+#space {
+    width: 20px;
+}
+
+#intro {
+    height: 550px;
+    text-shadow: 0 0 5px #000, 0 0 10px #000;
+    transform: scale(0);
+    transition: all 1s;
+}
+
+body:hover #intro{
+    transform: scale(1);
+}
+
+
+#intro-text {
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    font-family: Satisfy;
+}
+
+#intro-text span {
+    font-size: 80px
+}
+
+.margint {
+    margin-top: 2em;
+}
+.margint1 {
+    margin-top: 4em;
+}
+
+
+.footer {
+    background-color: #121212;
+    color: #fff;
+}
+
+.footer h3 {
+    font-family: Satisfy;
+    font-size: 40px;
+    color: #fff;
+}
+.footer h5 {
+   text-align: center;
+}
+
+.footer-top p {
+    width: 60%;
+    text-align: center;
+    
+}
+.fa {
+    
+    font-size: 50px !important;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 20px;
+    color: #fff;
+}
+
+.food-menu {
+}
+  
+.fa:hover {
+    opacity: 0.7; 
+    color: #fff; 
+}
+.fa-youtube:hover {
+    color: red;
+}
+
+.bottom-middle p {
+    text-align: center;
+}
+.bottom-right form{
+    width: 100%;
+ 
+ }
+.bottom-right input:first-child{
+    padding:8px 9px;
+    width: 70%;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    padding-right: 0;
+ }
+
+.bottom-right button{
+    background-color:#fff;
+    font-size: 10px !important;
+    height: 36.8px;
+    width: 40px;
+    border: none;
+    outline: none !important;
+}
+
+.container-fluid1 {
+    width: 80%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.food-item {
+    color: #222;
+}
+
+.food-item p {
+    font-size: 1.2em;
+}
+
+.food-item p span {
+    font-size: 0.7em;
+}
+
+.price {
+    color: #333;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.border-menu {
+    border: 70px solid transparent;
+    padding: 15px;
+    padding-top: 0;
+    -webkit-border-image: url(../images/border.png) 100%; 
+    -o-border-image: url(../images/border.png) 100%; 
+    border-image: url(../images/border.png) 45%;
+}
+
+@media screen and (min-width:991px) {
+    #discover .d-img {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:991px) {
+    #header {
+        height: 160px;
+    }
+}
+
+@media screen and (max-width:992px) {
+    #menu .menu-item {
+        margin: 15px 50px;
+    } 
+}
+
+@media screen and (max-width:768px) {
+    #menu .menu-item {
+        margin: 15px 30px;
+    } 
+}
+@media screen and (max-width:520px) {
+    #menu .menu-item {
+        margin: 15px 13px;
+    }
+}
+@media screen and (max-width:415px) {
+    #menu .menu-item {
+        margin: 15px 10px;
+    } 
+}
+
+@media screen and (max-width:360px) {
+    #menu .menu-item {
+        margin: 15px 8px;
+    } 
+}
+@media screen and (max-width:320px) {
+    #menu .menu-item {
+        margin: 15px 6px;
+    } 
+}
+@media screen and (min-width:320px) {
+    .sub-menu {
+        left: -20px;
+        top: 25px;
+    }
+}
+
+
+

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Delicious Restaurant</title>
+    <link rel="shortcut icon" href="./images/icon.PNG">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/styleBooking.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Satisfy">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="./js/jquery-3.3.1.js"></script>
+    <script src="./js/bootstrap.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="background-header">
+        <div id="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="logo" class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-center">
+                        <a href="index.html"><i id="icon" class="fas fa-utensils"></i></a>
+                        <p><a href="index.html" id="logo-text"><span>Delicious</span></a></p> 
+                    </div>
+                    <ul id="menu" class="col-lg-9 col-md-12 col-sm-12 d-flex justify-content-center justify-content-lg-end h6">
+                        <li class="menu-item"><a href="index.html">Home</a></li>
+                        <li class="menu-item"><a href="index.html#discover">Discover</a></li>
+                        <li class="menu-item has-sub-menu">
+                            <a href="menu.html">Menu</a>
+                            <ul class="sub-menu justify-content-between">
+                                <li><a href="#">Beef</a></li>
+                                <li id="space"></li>
+                                <li><a href="#">Fish</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item"><a href="booking.html">Booking</a></li>
+                        <li class="menu-item"><a href="#gofooter">Contact</a></li>
+                    </ul>
+                </div>  
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="intro" class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-center">
+                    <p id="intro-text"><span>Booking</span><br>online</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header -->
+
+    <!-- Body -->
+    <div class="container-fluid margint ">
+        <div class="row">
+            <div class="title-booking col-12 margint">
+                <h4>TABLE RESERVATION TEST</h4>
+                <p>Find your table</p>
+            </div>
+        </div>
+        <form  onsubmit="return check()">
+            <div class="row form d-flex justify-content-center mt-2">
+                <div class=" col-sm-12 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+                    <i class="fa fa-calendar"></i>
+                    <input type="date">
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+                    <i class="fa fa-clock-o"></i>
+                    <select class="option" name="" id="">
+                        <option value="" disabled>Morning</option>
+                        <option value="">11:00 AM</option>
+                        <option value="">11:30 AM</option>
+                        <option value="">12:00 PM</option>
+                        <option value="">12:30 PM</option>
+                        <option value="">1:00 PM</option>
+                        <option value="" disabled></option>
+                        <option value="" disabled>Afternoon</option>
+                        <option value="">5:00 PM</option>
+                        <option value="">5:30 PM</option>
+                        <option value="">6:00 PM</option>
+                        <option value="">6:30 PM</option>
+                        <option value="" disabled></option>
+                        <option value="" disabled>Night</option>
+                        <option value="">7:00 PM</option>
+                        <option value="">7:30 PM</option>
+                        <option value="">8:00 PM</option>
+                        <option value="">8:30 PM</option>
+                        <option value="">9:00 PM</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+                    <i class='fas fa-user-friends'></i>
+                    <select class="diner" name="" id="">
+                        <option value="">1 Person</option>
+                        <option value="">2 Person</option>
+                        <option value="">3 Person</option>
+                        <option value="">4 Person</option>
+                        <option value="">5 Person</option>
+                        <option value="">6 Person</option>
+                        <option value="">7 Person</option>
+                        <option value="">8 Person</option>
+                        <option value="">9 Person</option>
+                        <option value="">10 Person</option>
+                        <option value="">More...</option>
+                    </select> 
+                </div> 
+            </div>
+            <div class="row d-flex justify-content-center mt-2">
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <input type="submit" value="CHECK" class="check">
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mt-3">
+                <div class="col-12">
+                    <p id="noti"></p>
+                </div>
+            </div>
+        </form>
+        <hr class="margint">
+    </div>
+    <div class="container-fluid1  margint">
+        <div class="row">
+            <div class="col-12 col-lg-6  margint">
+                <div class="content-book">
+                    <h3>RESERVE BY PHONE</h3>
+                    <br>
+                    <p>We take reservations for lunch and dinner. 
+                        To make a reservation, please call us at 
+                        0978434621 between 10am-6pm, Monday to Friday.
+                    </p>
+                    <br>
+                    <p>We do not book the bar area – we 
+                        leave this for walk-in guests to
+                            ensure that we always offer some
+                            tables for those who have not booked.
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6  margint">
+                <div class="content-book">
+                    <h3>PRIVATE DINING & EVENTS</h3>
+                    <br>
+                    <p>Whatever your event or celebration, we are here
+                            to make your special day a truly memorable one.
+                            Delicious’s private dining experts are more than happy
+                            to create custom floral arrangements and arrange 
+                            for guests to meet Chef Moise during the course of
+                            their meal. For parties of 8-12 we have the roastery 
+                            table which is available for private hire.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!--slide  -->
+    <div id="carouselExampleInterval" class="carousel slide margint" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="2000">
+            <img src="./images/slide2.jpg" class="d-block w-100 slide-img" alt="...">
+            </div>
+            <div class="carousel-item" data-interval="2000">
+            <img src="./images/slide1.jpg" class="d-block w-100 slide-img" alt="...">
+            </div>
+            <div class="carousel-item" data-interval="2000">
+            <img src="./images/intro7.jpg" class="d-block w-100 slide-img" alt="...">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <!-- end slide -->
+    <div class="container-fluid1 room">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 margint1 d-flex flex-column justify-content-center align-items-center">
+                <h3>LUXURIOUS</h3>
+                <p class="mt-3">
+                    Rosa’s 50 seat room, “The Meazzanine Room” features 
+                    a temperature-controlled wine cellar, displays of
+                     more wine and a private atmosphere. A semi-private
+                      room, “Barbaresco,” is available for meetings,
+                       birthdays and other occasions.
+                    <br>
+                    <br>
+                    Seat up to 50 guests
+                </p>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 margint1">
+                <img src="./images/table1.jpg" alt="" class="img-room">
+            </div>
+        </div>
+        <hr class="margint1">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 margint1">
+                <img src="./images/table2.jpg" alt="" class="img-room">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 margint1 d-flex flex-column justify-content-center align-items-center">
+                <h3>BAR</h3>
+                <P class="mt-3">
+                    Bars provide stools or chairs that are placed at 
+                    tables or counters for their patrons. Bars that
+                     offer entertainment or live music are often
+                      referred to as music bars, live venues, or
+                       nightclubs. Types of bars range from inexpensive 
+                       dive bars[5] to elegant places of entertainment,
+                        often accompanying restaurants for dining.
+                </P>
+            </div>
+        </div>
+        <br>
+        <div class="row margint1">
+            <div class="col-12 bonus  d-flex flex-column justify-content-center align-items-center">
+                <h4>CHAMPAGNE ON US</h4>
+                <p>Every Monday, Tuesday and Wednesday evening, we’re offering groups of 10 or more that book an area in our bar a complimentary bottle of Champagne.</p>
+                <p>Call our reservations team on 0978434621 for more information.</p>
+            </div>
+        </div>
+    </div>
+    <!-- End Body -->
+
+    <!-- Footer -->
+    <div id="gofooter" class="container-fluid footer margint1 p-4">
+        <div class="row">
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center footer-top">
+                <h3>Delicious</h3> 
+                <p>Delicious is an enchanting and easy-to-use
+                     parallax Restaurant WordPress theme 
+                     that allows you to tell your story in
+                      a dynamic, narrative and enjoyable way,
+                       making it perfect for restaurants, 
+                       bakeries, bars or coffee shops.
+                </p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="bottom-left col-sm-12 col-md-4 col-lg-3">
+                <h5>FOLLOW US</h5>
+                <div class="d-flex justify-content-center">
+                    <a href="#"><i class="fa fa-facebook-square"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                </div>
+            </div>
+            <div class="bottom-middle col-sm-12 col-md-4 col-lg-6">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h5>ADDRESS</h5>
+                    <p>66 Crown Street, London</p>
+                    <P>Tel: 0978434621 - Email: Lettop00@gmail.com</P>
+                </div>
+            </div>
+            <div class="bottom-right col-sm-12 col-md-4 col-lg-3">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h5>MESSAGES</h5>
+                    <br>
+                    <form action="" class="d-flex justify-content-center align-items-center input-group">
+                        <input type="email" placeholder="Your email address... ">
+                        <button>
+                                <i class="fa fa-telegram" style="font-size:24px !important; color: #000; margin: 0;"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer -->
+
+    <script>
+        function check() {
+            var random = Math.random();
+            if(random>0.5){
+                document.getElementById('noti').innerHTML = '<br>We have a table for your time you choose!<br><br>'
+            }
+            else{
+                document.getElementById('noti').innerHTML = '<br>Sorry! We could not find the table for your time you choose!<br> <br>'
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
