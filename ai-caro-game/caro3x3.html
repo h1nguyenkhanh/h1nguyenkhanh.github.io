@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-transform: uppercase;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1531956468651-8fc931f28a9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2023&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        #chessBoard {
+            margin: auto;
+            box-shadow: 0 0 5px inset #fff;
+            /* background-color: rgba(255, 255, 255, 0.247); */
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+             supported by Chrome and Opera */
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            float: left;
+            background-color: transparent;
+            border: 0.5px solid #555;
+            line-height: 50px;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 35px;
+            font-weight: 600;
+            color: #fff;
+            pointer-events: stroke;
+        }
+
+        .box:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .green {
+            text-shadow: 0 0 10px #fff, 0 0 5px rgb(0, 255, 0), 0 0 10px rgb(0, 255, 0), 0 0 15px rgb(0, 255, 0), 0 0 20px rgb(0, 255, 0);
+        }
+
+        .blue {
+            text-shadow: 0 0 10px #fff, 0 0 5px rgb(0, 0, 255), 0 0 10px blue, 0 0 15px blue, 0 0 20px blue;
+        }
+
+        button {
+            border-radius: 999px;
+            font-size: 30px;
+            padding: 10px 20px;
+            outline: none;
+            margin: 30px 0;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chessBoard"></div>
+    <div id="container">
+        <button class="reset">reset</button>
+    <button class="undo">undo</button>
+    </div>
+    <script>
+        //Game start
+        var ready = 1;
+        var row = 3;
+        var col = 3;
+        var move = 2;
+        var boxs = document.getElementsByClassName('box');
+        var player = 'X';
+        var com = 'O';
+
+        //Khởi tạo mảng lưu giá trị
+        var board = new Array();
+        var stack = [];
+        for (var i = 1; i <= row; i++) {
+            board[i] = new Array();
+            for (var j = 1; j <= col; j++) {
+                board[i][j] = '';
+            }
+        }
+
+        //Vẽ bàn cờ
+        var table = document.getElementById('chessBoard');
+        for (var i = 1; i <= row; i++) {
+            for (var j = 1; j <= col; j++) {
+                table.innerHTML = table.innerHTML + `<div class="box _${i}${j}" data-row="${i}" data-col="${j}"></div>`;
+            }
+            table.innerHTML = table.innerHTML + '</br>'
+        }
+
+
+        var comMove = findMove(board);            
+            board[comMove.r][comMove.c] = com;
+            $(`._${comMove.r}${comMove.c}`).html(com);
+            $(`._${comMove.r}${comMove.c}`).addClass('blue');
+            stack.push({ r: comMove.r, c: comMove.c })
+            move++;
+        // draw X, O và gán giá trị vào mảng, check
+        $('.box').click(function () {
+            if ($(this).html() !== '' || ready == 0) {
+                return false;
+            }
+            var currentRow = parseInt(this.dataset.row);
+            var currentCol = parseInt(this.dataset.col);
+            stack.push({ r: currentRow, c: currentCol })
+            if (move % 2 !== 0) {
+                $(this).html(player);
+                $(this).addClass('green');
+                board[currentRow][currentCol] = player;
+                move++;
+            }
+            else {
+                $(this).html(com);
+                $(this).addClass('blue');
+                board[currentRow][currentCol] = com;
+                move++;
+            }
+
+            if(findMove(board)) {
+                var comMove = findMove(board);            
+            board[comMove.r][comMove.c] = com;
+            $(`._${comMove.r}${comMove.c}`).html(com);
+            $(`._${comMove.r}${comMove.c}`).addClass('blue');
+            stack.push({ r: comMove.r, c: comMove.c })
+            move++;
+            }
+
+            // checkWin
+            var winner = checkWin(board);
+            if (winner) {
+                if (winner == player) {
+                    setTimeout(() => {
+                        alert(player + ' win!!!');
+                    }, 1);
+                }
+                if (winner == com) {
+                    setTimeout(() => {
+                        alert(com + ' win!!!');
+                    }, 1);
+                }
+                ready = 0;
+            }
+
+            if (checkTie(board) && winner == undefined) {
+                setTimeout(() => {
+                    alert('Game Tie!!!');
+                }, 1);
+            }
+        });
+        $('.undo').click(function () {
+            if (ready == 1) {
+                undo();
+                setTimeout(() => { undo() }, 200)
+            }
+        })
+        $('.reset').click(reset)
+
+        function undo() {
+            var outBoard = stack.pop();
+            if (outBoard) {
+                board[outBoard.r][outBoard.c] = '';
+                if ($(`._${outBoard.r}${outBoard.c}`).html() == player) {
+                    $(`._${outBoard.r}${outBoard.c}`).removeClass('green');
+                }
+                if ($(`._${outBoard.r}${outBoard.c}`).html() == com) {
+                    $(`._${outBoard.r}${outBoard.c}`).removeClass('blue');
+                }
+                $(`._${outBoard.r}${outBoard.c}`).html('');
+            }
+        }
+
+        function reset() {
+            ready = 1;
+            move = 1;
+            stack = [];
+            for (var i = 1; i <= row; i++) {
+                for (var j = 1; j <= col; j++) {
+                    board[i][j] = '';
+                    if ($(`._${i}${j}`).html() == player) {
+                        $(`._${i}${j}`).removeClass('green');
+                    }
+                    if ($(`._${i}${j}`).html() == com) {
+                        $(`._${i}${j}`).removeClass('blue');
+                    }
+                    $(`._${i}${j}`).html('')
+                }
+            }
+        }
+
+        function checkBoardEmpty(board) {
+            for (var i = 1; i <= row; i++) {
+                for (var j = 1; j <= col; j++) {
+                    if(board[i][j] !== '') {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function checkTie(board) {
+            for (var i = 1; i <= row; i++) {
+                for (var j = 1; j <= col; j++) {
+                    if (board[i][j] == '') {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function checkWin(board) {
+            for (var i = 1; i <= row; i++) {
+                for (var j = 1; j <= col; j++) {
+                    if (board[i][j] !== '') {
+                        //Check dọc
+                        if (i <= row - 2) {
+                            if (board[i][j] == player && board[i + 1][j] == player && board[i + 2][j] == player) {
+                                return player;
+                            }
+                            if (board[i][j] == com && board[i + 1][j] == com && board[i + 2][j] == com) {
+                                return com;
+                            }
+                        }
+
+                        //Check ngang
+                        if (j <= col - 2) {
+                            if (board[i][j] == player && board[i][j + 1] == player && board[i][j + 2] == player) {
+                                return player
+                            }
+                            if (board[i][j] == com && board[i][j + 1] == com && board[i][j + 2] == com) {
+                                return com
+                            }
+                        }
+
+                        //Check chéo phải
+                        if (i <= row - 2 && j <= col - 2) {
+                            if (board[i][j] == player && board[i + 1][j + 1] == player && board[i + 2][j + 2] == player) {
+                                return player
+                            }
+                            if (board[i][j] == com && board[i + 1][j + 1] == com && board[i + 2][j + 2] == com) {
+                                return com
+                            }
+                        }
+
+                        //Check chéo trái
+                        if (i <= row - 2 && j >= 3) {
+                            if (board[i][j] == player && board[i + 1][j - 1] == player && board[i + 2][j - 2] == player) {
+                                return player
+                            }
+                            if (board[i][j] == com && board[i + 1][j - 1] == com && board[i + 2][j - 2] == com) {
+                                return com
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        function minimax(board, depth, isPlayer, alpha, beta) {
+            
+            
+            var winner = checkWin(board);
+            if(winner === com) {
+                return 100 - depth;
+            }
+            if(winner === player) {
+                return -100 + depth;
+            }
+            if(checkTie(board)===true) {
+                return 0;
+            }
+            if(isPlayer === com) {
+                var maxValue = -1000;
+                for(var i = 1; i <= row; i++) {
+                    for(var j = 1; j <= col; j++) {
+                        if(board[i][j] === '') {
+                            board[i][j] = com;
+                            var moveValue = minimax(board, depth + 1, player, alpha, beta);
+                            board[i][j] = '';
+                            if(moveValue > maxValue) {
+                                maxValue = moveValue;
+                            }
+                            if(alpha < maxValue) {
+                                alpha = maxValue;
+                            }
+                            if(beta <= alpha) {
+                                return alpha;
+                            }
+                        }
+                    }
+                }
+                return maxValue;
+            }
+            if(isPlayer === player) {
+                var minValue = 1000;
+                for(var i = 1; i <= row; i++) {
+                    for(var j = 1; j <= col; j++) {
+                        if(board[i][j] === '') {
+                            board[i][j] = player;
+                            var moveValue = minimax(board, depth + 1, com, alpha, beta);
+                            board[i][j] = '';
+                            if(moveValue < minValue) {
+                                minValue = moveValue;
+                            }
+                            if(beta > minValue) {
+                                beta = minValue;
+                            }
+                            if(beta <= alpha) {
+                                return beta;
+                            }
+                        }
+                    }
+                }                
+                return minValue;
+            }
+        }
+        function findMove(board) {
+            if(checkTie(board)) {
+                return false;
+            }
+            if(checkBoardEmpty(board)) {
+                var r = Math.round(Math.random() * (row - 1)) + 1;
+                var c = Math.round(Math.random() * (col - 1)) + 1;
+                return {r: r, c: c};
+            }
+            var max = -1000;
+            var move;
+            for(var i = 1; i <= row; i++) {
+                for(var j = 1; j <= col; j++) {
+                    if(board[i][j]=='') {
+                        board[i][j] = com;
+                        var moveValue = minimax(board, 0, player, -100000, 100000);
+                        board[i][j] = '';
+                        if(moveValue > max) {
+                            move = {r: i, c: j, v: moveValue};
+                            max = moveValue;
+                        }
+                    }
+                }
+            }
+            return move;
+        }
+
+
+        
+        
+    </script>

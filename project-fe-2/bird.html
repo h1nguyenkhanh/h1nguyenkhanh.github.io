@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" user-scalable=false>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Brave Bird</title>
+    <link rel="stylesheet" href="bird.css">
+</head>
+
+<body>
+    <div class="start-screen">
+        <h1>The Brave Bird</h1>
+        <button class="start-button shadow-active">START</button>
+        <p>
+            <span>Press SPACE to START</span>
+            <br>
+            <span>Control by arrow keys</span>
+        </p>
+    </div>
+    <div class="point-screen">0</div>
+    <div class="over-screen">
+        <h1>GAME OVER</h1>
+        <h2 class="total-point">0</h2>
+        <button class="again-button">Try Again</button>
+        <p>Have fun !!!</p>
+    </div>
+    <canvas id="game-screen">
+    </canvas>
+    <script src="bird.js"></script>
+    
+</body>
+
+</html>
